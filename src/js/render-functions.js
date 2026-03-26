@@ -2,6 +2,7 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const imageList = document.querySelector(".gallery");
+const loader = document.querySelector(".is-hidden");
 
 export function createImageCard(image) {
     const shortAlt = image.tags.split(',').slice(0, 3).join(', ');
@@ -50,3 +51,9 @@ export function clearGallery() {
 
 ////////////////////////////////////////////////
 
+export function showLoader() {
+  loader.classList.remove('is-hidden');
+}
+export function hideLoader() {
+  loader.classList.add('is-hidden');
+}

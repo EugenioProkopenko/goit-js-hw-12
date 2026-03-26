@@ -6,6 +6,8 @@ import { getImagesByQuery } from './js/pixabay-api';
 import { 
     createGallery,
     clearGallery,
+    showLoader,
+    hideLoader,
    
     } from './js/render-functions'
  
@@ -15,6 +17,7 @@ const refs = {
     hitsListElem: document.querySelector(".gallery"),
     btnLoadMore: document.querySelector(".load"),
     targetElem: document.querySelector('.js-target'),
+    
 };
 
 const PER_PAGE = 15;
@@ -33,24 +36,25 @@ refs.formElem.addEventListener("submit", async (e) => {
     page = 1;
     hideLoadMoreButton();
     clearGallery();
+    showLoader();
     
     try {
          const res = await getImagesByQuery(query, page);
-    
-    const markup = createGallery(res.hits);
-    refs.hitsListElem.innerHTML = markup;
-    totalHitsPage = Math.ceil(res.totalHits / PER_PAGE);
+       
+         const markup = createGallery(res.hits);
+         refs.hitsListElem.innerHTML = markup;
+         totalHitsPage = Math.ceil(res.totalHits / PER_PAGE);
 
      } catch (error) {
-    console.error(error);
-    iziToast.error({
+        console.error(error);
+       iziToast.error({
         message: 'An error occurred. Try again!',
         position: 'bottomCenter',
     });
 }
     
    
-
+    hideLoader();
     checkBtnStatus();
     e.target.reset();
 });
@@ -59,15 +63,18 @@ refs.btnLoadMore.addEventListener('click', async e=> {
     hideLoadMoreButton()
     
     page += 1;
+    showLoader();
     try {
-        const res = await getImagesByQuery(query, page);
+         const res = await getImagesByQuery(query, page);
     
-    const markup = createGallery(res.hits);
-    refs.hitsListElem.insertAdjacentHTML("beforeend", markup);
-    scrollPage();
+         const markup = createGallery(res.hits);
+         refs.hitsListElem.insertAdjacentHTML("beforeend", markup);
+         scrollPage();
     } catch {}
+        
+    hideLoader();
     
-    checkBtnStatus();
+       checkBtnStatus();
 })
 
 
