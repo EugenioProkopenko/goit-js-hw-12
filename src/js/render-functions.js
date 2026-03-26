@@ -40,4 +40,14 @@ export function createGallery(images) {
     return images.map(createImageCard).join('');
 }
 
+///////////////////////////////////////////
+export function showLoadMoreButton() {
+    refs.btnLoadMore.classList.remove('is-hidden');
+
+};
+export function hideLoadMoreButton() {
+    refs.btnLoadMore.classList.add('is-hidden');
+    
+}
+
 
