@@ -5,8 +5,9 @@ import "izitoast/dist/css/iziToast.min.css";
 import { getImagesByQuery } from './js/pixabay-api';
 import { 
     createGallery,
-    
-} from './js/render-functions'
+    clearGallery,
+   
+    } from './js/render-functions'
  
 
 const refs = {
@@ -30,20 +31,23 @@ refs.formElem.addEventListener("submit", async (e) => {
     query = formData.get('query').trim();
    
     page = 1;
-    hideLoadMoreButton()
+    hideLoadMoreButton();
+    clearGallery();
     
     try {
          const res = await getImagesByQuery(query, page);
-    console.log(res);
+    
     const markup = createGallery(res.hits);
     refs.hitsListElem.innerHTML = markup;
     totalHitsPage = Math.ceil(res.totalHits / PER_PAGE);
-    if(totalHitsPage === 0) {
-        iziToastError('Nothing found');
 
-    }
-  
-    } catch {}
+     } catch (error) {
+    console.error(error);
+    iziToast.error({
+        message: 'An error occurred. Try again!',
+        position: 'bottomCenter',
+    });
+}
     
    
 
@@ -66,17 +70,15 @@ refs.btnLoadMore.addEventListener('click', async e=> {
     checkBtnStatus();
 })
 
-///////////////////////////////////////////////(
 
-function showLoadMoreButton() {
+ function showLoadMoreButton() {
     refs.btnLoadMore.classList.remove('is-hidden');
 
 };
-function hideLoadMoreButton() {
+ function hideLoadMoreButton() {
     refs.btnLoadMore.classList.add('is-hidden');
     
-}
-//////////////////////////Final Colecion Load More/////////////
+};
 
  function checkBtnStatus() {
     if (page >= totalHitsPage) {
@@ -88,32 +90,18 @@ function hideLoadMoreButton() {
         showLoadMoreButton();
     }
  }
-///////////////////////
 
 function iziToastSuccess(message) {
     iziToast.success({
     message: message,
+    position: 'bottomCenter',
 });
 }
 
-/////////////////////////////////
-const vasya = new IntersectionObserver((items) => {
-    const item = items[0];
-    
-    if(item.isIntersecting) {
-        console.log("Load More");
-        getImagesByQuery();
-    }
-  
 
-});
-vasya.observe(refs.targetElem);
-
-
-///////////////////////////////////////
 function scrollPage() {
     const elem = refs.hitsListElem.lastElementChild;
-    console.log(elem);
+    
     const height = elem.getBoundingClientRect().height;
     window.scrollBy({
         top: height * 2.2,
