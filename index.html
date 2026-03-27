@@ -6,32 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla App Template</title>
     <script type="module" crossorigin src="/goit-js-hw-12/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-D8utHqLp.js">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/vendor-DumFYO8Z.css">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/index--zx5GtSy.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-BkC4bTqC.js">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/vendor-CWKLx11g.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/index-GbU2v3QE.css">
   </head>
   <body>
-   
-
-    <main>
-    <form class="form">
-  <label>
-    <input type="text" name="query" placeholder="Search images..." >
-  </label>
-  <button type="submit">Search</button>
-</form>
-
-
-<ul class="gallery"></ul>
-
-  <span class="loader is-hidden"></span>
-
-<button class="load is-hidden" type="submit">Load More</button>
-
-<div class="js-target"></div>
-    </main>
-
-    
-
+    <header class="header container">
+      <form class="form">
+        <label>
+          <input
+            type="text"
+            name="search-text"
+            placeholder="search images..."
+            
+          />
+        </label>
+        <button class="btn-search" type="submit">Search</button>
+      </form>
+      <ul class="gallery"></ul>
+      <span class="loader is-hidden"></span>
+      <button class="load is-hidden" type="submit">load more</button>
+    </header>
   </body>
 </html>
