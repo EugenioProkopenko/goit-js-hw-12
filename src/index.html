@@ -8,28 +8,22 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-   
-
-    <main>
-    <form class="form">
-  <label>
-    <input type="text" name="query" placeholder="Search images..." >
-  </label>
-  <button type="submit">Search</button>
-</form>
-
-
-<ul class="gallery"></ul>
-
-  <span class="loader is-hidden"></span>
-
-<button class="load is-hidden" type="submit">Load More</button>
-
-<div class="js-target"></div>
-    </main>
-
-    
-
+    <header class="header container">
+      <form class="form">
+        <label>
+          <input
+            type="text"
+            name="search-text"
+            placeholder="search images..."
+            
+          />
+        </label>
+        <button class="btn-search" type="submit">Search</button>
+      </form>
+      <ul class="gallery"></ul>
+      <span class="loader is-hidden"></span>
+      <button class="load is-hidden" type="submit">load more</button>
+    </header>
     <script type="module" src="./main.js"></script>
   </body>
 </html>
