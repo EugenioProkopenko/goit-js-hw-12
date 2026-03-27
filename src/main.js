@@ -32,6 +32,14 @@ refs.formElem.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     query = formData.get('query').trim();
+    if (query === '') {
+        
+    iziToast.error({
+        message: 'Enter your query!',
+        position: 'bottomCenter',
+    });
+    return;
+}
    
     page = 1;
     hideLoadMoreButton();
@@ -40,6 +48,17 @@ refs.formElem.addEventListener("submit", async (e) => {
     
     try {
          const res = await getImagesByQuery(query, page);
+          if (res.totalHits === 0) {
+            hideLoader();
+            e.target.reset();
+            
+        iziToast.error({
+            
+            message: 'Nothing found',
+            position: 'center',
+        });
+        return;
+    }
        
          const markup = createGallery(res.hits);
          refs.hitsListElem.innerHTML = markup;

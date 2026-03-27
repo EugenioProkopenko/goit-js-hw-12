@@ -37,9 +37,15 @@ export function createImageCard(image) {
     </li>
     `;
 }
+
+
+
+
 export function createGallery(images) {
     return images.map(createImageCard).join('');
 }
+
+
 
 ///////////////////////////////////////////
 
